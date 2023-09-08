@@ -1,3 +1,9 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
+
 .typebox {
   height: 40px;
   width: 40px;

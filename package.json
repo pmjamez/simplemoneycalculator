@@ -1,0 +1,22 @@
+{
+  "name": "simplemoneycalculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "http-server -p 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmjamez/simplemoneycalculator.git"
+  },
+  "author": "pmjamez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pmjamez/simplemoneycalculator/issues"
+  },
+  "homepage": "https://github.com/pmjamez/simplemoneycalculator#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

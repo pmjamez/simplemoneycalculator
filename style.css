@@ -1,8 +1,17 @@
-.typebox{
-    height: 40px;
-    width: 40px;
-    border: 2px solid;
-    
+.typebox {
+  height: 40px;
+  width: 40px;
+  border: 2px solid;
+}
 
-
+.button {
+  background-color: white;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 40px;
+  transition: all 0.3s ease-in-out;
 }

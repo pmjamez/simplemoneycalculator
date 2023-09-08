@@ -1,4 +1,6 @@
-const navigateTo = url => url {
+import Dashboard from "./views/Dashboard.js";
+
+const navigateTo = url => {
     history.pushState(null, null, url);
     router();
 };
@@ -7,9 +9,9 @@ const navigateTo = url => url {
 const router = async() => {
     //clientside development stuff
     const routes = [
-        { path: "/", view: () => console.log("Viewing Dashboard")},
-        { path: "/posts", view: () => console.log("Viewing Posts")},
-        { path: "/settings", view: () => console.log("Viewing Settings")},
+        { path: "/", view: Dashboard},
+        // { path: "/posts", view: () => console.log("Viewing Posts")},
+        // { path: "/settings", view: () => console.log("Viewing Settings")},
     ];
 
     const potentialMatches = routes.map(route => {
@@ -27,10 +29,15 @@ const router = async() => {
             isMatch: true
         }
     }
-    console.log(match.route.view());
 
-}
+    const view = new match.route.view();
 
+    document.querySelector("#app").innerHTML = await view.getHtml();
+};
+
+window.addEventListener("popstate", router);
+
+//References history when clicking on new links, redirects default behavior, more efficient
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link")){

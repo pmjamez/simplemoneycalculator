@@ -1,3 +1,9 @@
+const navigateTo = url => url {
+    history.pushState(null, null, url);
+    router();
+};
+
+
 const router = async() => {
     //clientside development stuff
     const routes = [
@@ -21,11 +27,17 @@ const router = async() => {
             isMatch: true
         }
     }
-    console.log(match);
+    console.log(match.route.view());
 
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("click", e => {
+        if (e.target.matches("[data-link")){
+            e.preventDefault();
+            navigateTo(e.target.href);
+        }
+    });
     router();
 });
 console.log("JS is loaded!");

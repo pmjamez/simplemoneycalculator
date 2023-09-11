@@ -63,12 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     router();
 });
-console.log("JS is loaded!");
-// function app(){
-//     return(
-//         <div className = "flex">
 
-//         </div>
-//     );
-// }
-// export default app;
+
+function apple(){
+    return(
+        <div className = "text-center text-green-700 font-bold">
+            Hi mom!
+        </div>
+    );
+}
+export default apple;

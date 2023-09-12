@@ -27,7 +27,8 @@ const router = async() => {
         { path: "/", view: Dashboard},
         { path: "/posts", view: Posts},
         { path: "/posts/:id", view: Postview},
-        { path: "/settings", view: Settings}
+        { path: "/settings", view: Settings},
+        { path: "/something", view: Settings}
     ];
 
     const potentialMatches = routes.map(route => {
@@ -65,11 +66,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function apple(){
-    return(
-        <div className = "text-center text-green-700 font-bold">
-            Hi mom!
-        </div>
-    );
-}
-export default apple;

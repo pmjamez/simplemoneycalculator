@@ -1,6 +1,4 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+
 
 body {
   --nav-width: 200px;
@@ -14,15 +12,32 @@ body {
 .nav {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  position: fixed;
+  align-items: first baseline;
+  position: absolute;
   top: 100px;
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   height: 100vh;
-  background: g; /* Change background color to light green */
 }
+
+.rounded-rectangle {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: flex-start;
+  align-items: flex-start; /* Center horizontally */
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+  width: 60%;
+  height: 40%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 .nav__link {
   position:relative;
@@ -44,38 +59,31 @@ body {
   font-weight: 500;
 }
 
-a {
-  color: #009579;
+.input-box {
+  position: relative;
+  display: flex;
+  justify-content: baseline;
+  align-items:baseline;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none; /* Remove the default focus outline */
 }
 
-.typebox {
-  input[type=text]{
-    width: 100%;
-    border: 2px solid #aaa;
-    border-radius: 4px;
-    margin: 8px 0;
-    outline: none;
-    padding: 8px;
-    box-sizing:border-box;
-    transition: .3px;
-
-  }
-
-  input[type=text]:focus{
-    border-color: dodgerblue;
-    box-shadow:0 0 8px 0 dodgerblue;
-
-  }
+/* Style for the input box when it's focused */
+.input-box:focus {
+  border-color: #007bff; /* Change the border color when focused */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow when focused */
 }
 
-.button {
-  background-color: white;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 40px;
-  transition: all 0.3s ease-in-out;
+.title {
+  font-size: 24px;
+  margin-bottom: 10px; /* Add spacing between title and input box */
+}
+
+.description {
+  font-size: 14px; /* Smaller font size for description */
+  color: #555; /* Adjust text color as needed */
 }

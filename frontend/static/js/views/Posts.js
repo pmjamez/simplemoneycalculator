@@ -23,9 +23,18 @@ export default class extends AbstractView{
                 <label for="tax-input" class="input-label">Something:</label>
                 <input type="text" id="tax-input" class="input-box" placeholder="Enter text...">
 
+                <button class="blue-button">Submit</button>
+            </div>
+
+
+            </div>
+            
+          <div class="second-rounded-rectangle">
+
+              </div>
+  
+    
        
-            </div>
-            </div>
 
          </body>
       

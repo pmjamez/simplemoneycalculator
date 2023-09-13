@@ -23,21 +23,38 @@ body {
 
 .rounded-rectangle {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction:column; /* Stack elements vertically */
   justify-content: flex-start;
   align-items: flex-start; /* Center horizontally */
   position: absolute;
-  top: 50%; /* Center vertically */
+  top: 30%; /* Center vertically */
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Center both horizontally and vertically */
   width: 60%;
-  height: 40%;
+  height: 30%;
   background-color: white;
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
+.blue-button {
+  margin-top: 10px;
+  display: flex;
+  background-color: #007bff; /* Blue background color */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;
+  cursor: pointer;
+  outline: none; /* Remove the default focus outline */
+}
+
+/* Style for the button when hovered */
+.blue-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
 
 .nav__link {
   display: block;
@@ -63,13 +80,15 @@ body {
 }
 
 .input-box {
-    width: 90%;
+    width: 150%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
     margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 /* Style for the input box when it's focused */
@@ -80,7 +99,7 @@ body {
 
 .title {
   font-size: 24px;
-  margin-bottom: 10px; /* Add spacing between title and input box */
+  margin-bottom: 5px; /* Add spacing between title and input box */
 }
 
 .description {
@@ -92,11 +111,27 @@ body {
   font-size: 14px;
   margin-right: 30px;
 }
-
 .input-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items:flex-start;
   margin-right: 10px;
   
+}
+
+.second-rounded-rectangle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  top: calc(50% + 350px); /* Position below the first rounded rectangle */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 40%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }

@@ -1,8 +1,6 @@
 
-import Posts from "./views/Posts.js";
+import salary from "./views/salary.js";
 import tax from "./views/tax.js";
-
-import Settings from "./views/tax.js"
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -25,7 +23,7 @@ const router = async() => {
     console.log(pathToRegex('/posts/:id'));
     //clientside development stuff
     const routes = [
-        { path: "/posts", view: Posts},
+        { path: "/salary", view: salary},
         { path: "/tax", view: tax}
     ];
 

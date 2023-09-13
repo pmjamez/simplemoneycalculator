@@ -27,11 +27,11 @@ body {
   justify-content: flex-start;
   align-items: flex-start; /* Center horizontally */
   position: absolute;
-  top: 30%; /* Center vertically */
+  top: 50%; /* Center vertically */
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Center both horizontally and vertically */
   width: 60%;
-  height: 30%;
+  height: 50%;
   background-color: white;
   border-radius: 20px;
   padding: 20px;
@@ -134,4 +134,5 @@ body {
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 100px;
 }

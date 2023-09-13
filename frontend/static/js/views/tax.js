@@ -3,7 +3,7 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView{
     constructor(params){
         super(params);
-        this.setTitle("Posts");
+        this.setTitle("tax");
         
     }
 
@@ -13,7 +13,7 @@ export default class extends AbstractView{
         <body>
 
           <div class="rounded-rectangle">
-            <h2 class = "title">Calculate Salary</h2>
+            <h2 class = "title">Calculate Tax</h2>
             <p class="description">Calculate your estimated tax payments based on your salary</p>
 
             <div class="input-container">
@@ -28,11 +28,10 @@ export default class extends AbstractView{
             </div>
 
          </body>
-      
-    `
-        
-        
-        
+
+       
+
+        `;
 
 
     }

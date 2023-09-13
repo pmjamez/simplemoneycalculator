@@ -40,8 +40,7 @@ body {
 
 
 .nav__link {
-  position:relative;
-  display: inline-block;
+  display: block;
   padding: 12px 18px;
   text-decoration: none;
   color: #060707;
@@ -59,17 +58,18 @@ body {
   font-weight: 500;
 }
 
+.a {
+  color: #009579;
+}
+
 .input-box {
-  position: relative;
-  display: flex;
-  justify-content: baseline;
-  align-items:baseline;
-  width: 80%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  outline: none; /* Remove the default focus outline */
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    margin-right: 10px;
 }
 
 /* Style for the input box when it's focused */
@@ -86,4 +86,17 @@ body {
 .description {
   font-size: 14px; /* Smaller font size for description */
   color: #555; /* Adjust text color as needed */
+}
+
+.input-label{
+  font-size: 14px;
+  margin-right: 30px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+  
 }

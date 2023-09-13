@@ -1,7 +1,8 @@
-import Dashboard from "./views/Dashboard.js";
+
 import Posts from "./views/Posts.js";
-import Postview from "./views/Posts.js";
-import Settings from "./views/Settings.js"
+import tax from "./views/tax.js";
+
+import Settings from "./views/tax.js"
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -24,11 +25,8 @@ const router = async() => {
     console.log(pathToRegex('/posts/:id'));
     //clientside development stuff
     const routes = [
-        { path: "/", view: Dashboard},
         { path: "/posts", view: Posts},
-        { path: "/posts/:id", view: Postview},
-        { path: "/settings", view: Settings},
-        { path: "/something", view: Settings}
+        { path: "/tax", view: tax}
     ];
 
     const potentialMatches = routes.map(route => {

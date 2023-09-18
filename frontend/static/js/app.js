@@ -62,3 +62,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("submit-button").addEventListener("click", function () {
+        const taxInput = parseFloat(document.getElementById("salary-input").value);
+        const stateInput = parseFloat(document.getElementById("state-input").value);
+        const statusInput = parseFloat(document.getElementById("status-input").value);
+        const bonusInput = parseFloat(document.getElementById("bonus-input").value);
+        const contributionInput = parseFloat(document.getElementById("contribution-input").value);
+
+        const sum = taxInput * 0.67;
+        console.log(sum);
+        document.getElementById("tax-result").value = sum;
+       
+
+
+        
+
+    });
+  });
+  

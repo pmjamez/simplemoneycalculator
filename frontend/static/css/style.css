@@ -103,7 +103,7 @@ body {
 }
 
 .input-box {
-    width: 100%;
+    width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;

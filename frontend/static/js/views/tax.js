@@ -16,7 +16,7 @@ export default class extends AbstractView{
     
           <nav class = "nav">
                 <a href = "/tax" class = "nav__link" data-link > Tax Calculator </a>
-                <a href = "/salary" class = "nav__link" data-link> Salary Calculator</a>
+                <a href = "/salary" class = "nav__link" data-link> Wage Converter</a>
            </nav>
          </div>
 
@@ -26,11 +26,74 @@ export default class extends AbstractView{
              <p class="description">Calculate your estimated tax payments based on your yearly salary</p>
 
                 <div class="input-container">
-                    <label for="tax-input" class="input-label">Enter Yearly Salary:</label>
-                    <input type="number" id="tax-input" class="input-box" placeholder="Enter Yearly Salary">
-                    <label for="tax-input" class="input-label">Additional:</label>
-                    <input type="number" id="tax-input" class="input-box" placeholder="Enter Bonus (Optional)">
-                    <button class="blue-button">Submit</button>
+                    <label for="salary-input" class="input-label">Salary:</label>
+                    <input type="number" id="salary-input" class="input-box" placeholder="Enter Yearly Salary">
+                    <label for="state-input" class="input-label">State:</label>
+                    <select id="state-input" class="input-box" placeholder="Select State">
+                        <option value="">Select a state</option>
+                        <option value="AL">Alabama (AL)</option>
+                        <option value="AK">Alaska (AK)</option>
+                        <option value="AZ">Arizona (AZ)</option>
+                        <option value="AR">Arkansas (AR)</option>
+                        <option value="CA">California (CA)</option>
+                        <option value="CO">Colorado (CO)</option>
+                        <option value="CT">Connecticut (CT)</option>
+                        <option value="DE">Delaware (DE)</option>
+                        <option value="FL">Florida (FL)</option>
+                        <option value="GA">Georgia (GA)</option>
+                        <option value="HI">Hawaii (HI)</option>
+                        <option value="ID">Idaho (ID)</option>
+                        <option value="IL">Illinois (IL)</option>
+                        <option value="IN">Indiana (IN)</option>
+                        <option value="IA">Iowa (IA)</option>
+                        <option value="KS">Kansas (KS)</option>
+                        <option value="KY">Kentucky (KY)</option>
+                        <option value="LA">Louisiana (LA)</option>
+                        <option value="ME">Maine (ME)</option>
+                        <option value="MD">Maryland (MD)</option>
+                        <option value="MA">Massachusetts (MA)</option>
+                        <option value="MI">Michigan (MI)</option>
+                        <option value="MN">Minnesota (MN)</option>
+                        <option value="MS">Mississippi (MS)</option>
+                        <option value="MO">Missouri (MO)</option>
+                        <option value="MT">Montana (MT)</option>
+                        <option value="NE">Nebraska (NE)</option>
+                        <option value="NV">Nevada (NV)</option>
+                        <option value="NH">New Hampshire (NH)</option>
+                        <option value="NJ">New Jersey (NJ)</option>
+                        <option value="NM">New Mexico (NM)</option>
+                        <option value="NY">New York (NY)</option>
+                        <option value="NC">North Carolina (NC)</option>
+                        <option value="ND">North Dakota (ND)</option>
+                        <option value="OH">Ohio (OH)</option>
+                        <option value="OK">Oklahoma (OK)</option>
+                        <option value="OR">Oregon (OR)</option>
+                        <option value="PA">Pennsylvania (PA)</option>
+                        <option value="RI">Rhode Island (RI)</option>
+                        <option value="SC">South Carolina (SC)</option>
+                        <option value="SD">South Dakota (SD)</option>
+                        <option value="TN">Tennessee (TN)</option>
+                        <option value="TX">Texas (TX)</option>
+                        <option value="UT">Utah (UT)</option>
+                        <option value="VT">Vermont (VT)</option>
+                        <option value="VA">Virginia (VA)</option>
+                        <option value="WA">Washington (WA)</option>
+                        <option value="WV">West Virginia (WV)</option>
+                        <option value="WI">Wisconsin (WI)</option>
+                        <option value="WY">Wyoming (WY)</option>
+                     </select>
+                    <label for="status-input" class="input-label">Status:</label>
+                    <select id="status-input" class="input-box" placeholder="Select Status">
+                        <option value="">Select Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married, Filing Jointly">Married</option>
+                        <option value="Married, Filing Separately">Divorced</option>
+                        <option value="Head of Household">Head of Household</option>
+                     </select>
+                    <label for="bonus-input" class="input-label">Additional (Optional):</label>
+                    <input type="number" id="bonus-input" class="input-box" placeholder="Enter Bonus">
+                    <input type="number" id="contribution-input" class="input-box" placeholder="Contributions (401K, HSA, 457b)">
+                    <button id = "submit-button" class="blue-button">Submit</button>
                 </div>
            </div>
 
@@ -39,11 +102,10 @@ export default class extends AbstractView{
              <p class="description">**Note this is only based on the standard deduction and no other contributions**</p>
 
                 <div class="input-container">
-                    <label for="tax-input" class="input-label">Tax Amount:</label>
-                    <input type="text" id="tax-input" class="input-box" placeholder="Enter text...">
-                    <label for="tax-input" class="input-label">Something:</label>
-                    <input type="text" id="tax-input" class="input-box" placeholder="Enter text...">
-                    <button class="blue-button">Submit</button>
+                    <label for="tax-result" class="input-label">Total Yearly Tax Amount:</label>
+                    <input type="text" id="tax-result" class="input-box" placeholder="">
+                    
+                  
                 </div>
 
             </div>
@@ -52,9 +114,10 @@ export default class extends AbstractView{
 
 
          </div>
+
+         <script src="app.js"></script>
         
 
-        
         
         </body>
 
@@ -62,4 +125,6 @@ export default class extends AbstractView{
 
 
     }
-}
+
+};
+ 

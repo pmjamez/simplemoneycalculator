@@ -103,7 +103,7 @@ export default class extends AbstractView{
 
                 <div class="input-container">
                     <label for="tax-result" class="input-label">Total Yearly Tax Amount:</label>
-                    <input type="text" id="tax-result" class="input-box" placeholder="">
+                    <input type="text" id="tax-result" class="input-box" placeholder=""disabled>
                     
                   
                 </div>

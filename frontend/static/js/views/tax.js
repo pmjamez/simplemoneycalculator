@@ -119,9 +119,6 @@ export default class extends AbstractView{
                     <label for="monthtakehome-pay" class="input-label">Monthly Take-Home Pay:</label>
                     <input type="text" id="monthtakehome-pay" class="input-box" placeholder=""disabled>
                
-                    
-                    
-                  
                 </div>
 
             </div>

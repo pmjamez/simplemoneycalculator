@@ -10,3 +10,5 @@ app.get("/*", (req, res) => {
 });
 
 app.listen(process.env.port || 8000, () => console.log("Server running ..."))
+
+app.use(express.static('public'));

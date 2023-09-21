@@ -4,8 +4,10 @@ body {
   
   font-family: 'Quicksand', sans-serif;
   font-size: 18px;
-  background-image: url();
-
+  background-image: url("/assets/money.jpg");
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center; 
 }
 
 .nav {

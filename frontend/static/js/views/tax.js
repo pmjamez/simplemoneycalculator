@@ -10,13 +10,13 @@ export default class extends AbstractView{
     async getHtml(){
         return `
         <body>
-
-        <h1 class="page-title">QUICK CASH</h1>
+         </div>  
 
     
           <nav class = "nav">
-                <a href = "/tax" class = "nav__link" data-link > Tax Calculator </a>
-                <a href = "/salary" class = "nav__link" data-link> Wage Converter</a>
+                <a href = "/tax" class = "nav__link" data-link > <b> Tax Calculator</b> </a>
+                <a href = "/salary" class = "nav__link" data-link> <b>Wage Converter<b></a>
+
            </nav>
          </div>
 
@@ -129,6 +129,7 @@ export default class extends AbstractView{
          </div>
 
          <script src="app.js"></script>
+        
         
 
         

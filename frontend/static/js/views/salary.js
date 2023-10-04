@@ -35,9 +35,9 @@ export default class extends AbstractView{
                     <select id="status-input" class="input-box" placeholder="Select Status">
                         <option value="">Select Status</option>
                         <option value="Single">Single</option>
-                        <option value="Married, Filing Jointly">Married</option>
-                        <option value="Married, Filing Separately">Divorced</option>
-                        <option value="Head of Household">Head of Household</option>
+                        <option value="Married">Married, Filed Jointly</option>
+                        <option value="MarriedSep">Married, Filed Separately</option>
+                        <option value="Head of Household"> Head of Household</option>
                      </select>
                     <label for="bonus-input" class="input-label">Additional (Optional):</label>
                     <input type="number" id="bonus-input" class="input-box" placeholder="Enter Bonus">

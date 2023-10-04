@@ -61,7 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     router();
 });
 
+function AGI(taxInput){
+    return taxInput * 0.67;
 
+  }
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("submit-button").addEventListener("click", function () {
@@ -71,14 +74,32 @@ document.addEventListener("DOMContentLoaded", function () {
         const bonusInput = parseFloat(document.getElementById("bonus-input").value);
         const contributionInput = parseFloat(document.getElementById("contribution-input").value);
 
-        const sum = taxInput * 0.67;
+        // const singleStandardDeduction = 13850;
+        // const headStandardDeduction = 20800;
+        // const marriedStandardDeduction = 27700;
+
+        // const dependentCredit = 2000;
+
+        // let AGI;
+
+        // if (statusInput === "Single" || statusInput === "MarriedSep"){
+        //     AGI = taxInput - singleStandardDeduction;
+        // } else if (stateInput === "Married"){
+        //     AGI = taxInput - marriedStandardDeduction;
+        // } else if (stateInput === "Head of Household"){
+        //     AGI = taxInput - headStandardDeduction;
+        // }else{
+        //     console.error("Invalid filing status");
+        //     return;
+        // }
+    
+        let sum = AGI(taxInput);
         console.log(sum);
         document.getElementById("tax-result").value = sum;
        
 
-
-        
-
     });
   });
+
+
   

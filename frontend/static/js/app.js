@@ -61,40 +61,54 @@ document.addEventListener("DOMContentLoaded", () => {
     router();
 });
 
-function AGI(taxInput){
-    return taxInput * 0.67;
+function AGI(taxInput, statusInput, contributionInput, dependentInput){
+    const singleStandardDeduction = 13850;
+    const headStandardDeduction = 20800;
+    const marriedStandardDeduction = 27700;
+    const dependentCredit = 2000;
+
+    const contribution = isNaN(contributionInput) ? 0 : parseFloat(contributionInput);
+    const dependent = isNaN(dependentInput) ? 0 : parseFloat(dependentInput) * dependentCredit;
+    
+    if (statusInput === "Single" || statusInput === "MarriedSep"){
+            return taxInput - singleStandardDeduction - contribution - dependent;
+        } else if (statusInput === "Married"){
+            return taxInput - marriedStandardDeduction - contribution - dependent;
+        } else if (statusInput === "Head of Household"){
+            return taxInput - headStandardDeduction - contribution - dependent;
+        }else{
+            console.log("Invalid filing status");
+        }
 
   }
+
+function CalculateFederalTax(){
+    return
+}
+
+function CalculateStateTax(){
+    return
+}
+
+function CalculateSocialSecurityTax(){
+    return
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("submit-button").addEventListener("click", function () {
         const taxInput = parseFloat(document.getElementById("salary-input").value);
         const stateInput = parseFloat(document.getElementById("state-input").value);
-        const statusInput = parseFloat(document.getElementById("status-input").value);
+        const statusSelect = document.getElementById("status-input");
+        const statusInput = statusSelect.options[statusSelect.selectedIndex].value;
         const bonusInput = parseFloat(document.getElementById("bonus-input").value);
         const contributionInput = parseFloat(document.getElementById("contribution-input").value);
+        const dependentInput = parseFloat(document.getElementById("dependent-input").value);
 
-        // const singleStandardDeduction = 13850;
-        // const headStandardDeduction = 20800;
-        // const marriedStandardDeduction = 27700;
-
-        // const dependentCredit = 2000;
-
-        // let AGI;
-
-        // if (statusInput === "Single" || statusInput === "MarriedSep"){
-        //     AGI = taxInput - singleStandardDeduction;
-        // } else if (stateInput === "Married"){
-        //     AGI = taxInput - marriedStandardDeduction;
-        // } else if (stateInput === "Head of Household"){
-        //     AGI = taxInput - headStandardDeduction;
-        // }else{
-        //     console.error("Invalid filing status");
-        //     return;
-        // }
     
-        let sum = AGI(taxInput);
+        let sum = AGI(taxInput, statusInput, contributionInput,dependentInput);
         console.log(sum);
+        console.log(statusInput);
         document.getElementById("tax-result").value = sum;
        
 

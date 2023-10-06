@@ -93,8 +93,34 @@ function AGI(taxInput, statusInput, contributionInput, dependentInput){
         }
   }
 
-function CalculateFederalTax(){
-    return
+function CalculateFederalTax(AdjustedIncome, statusInput){
+    const taxRates = [0.1, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37];
+
+    let incomeAmounts = [];
+
+    if (statusInput === 'Single' || statusInput === 'MarriedSep') {
+        incomeAmounts = [0, 11000, 44725, 95375, 182100, 231250, 578125];
+    } else if (statusInput === 'Married') {
+        incomeAmounts = [0, 22000, 89450, 190750, 364200, 462500, 693750];
+    } else if (statusInput === "Head of Household") {
+        incomeAmounts = [0, 15700, 59850, 95350, 182100, 2312250, 578100];
+    } else {
+        console.log ("error");
+    }
+    let taxOwed = 0;
+    
+    for (let i = 1; i < incomeAmounts.length; i++) {
+        const prevIncome = incomeAmounts[i - 1];
+        const currentIncome = incomeAmounts[i];
+
+        if (AdjustedIncome <= currentIncome) {
+            taxOwed += (AdjustedIncome - prevIncome) * taxRates[i - 1];
+            break; 
+        } else {
+            taxOwed += (currentIncome - prevIncome) * taxRates[i - 1];
+        }
+    }
+    return taxOwed;
 }
 
 function CalculateStateTax(sum, stateInput){
@@ -124,10 +150,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clear any previous error message
         document.getElementById("error-message").textContent = "";
     
-        let sum = AGI(taxInput, statusInput, contributionInput, dependentInput);
+        let AdjustedIncome = AGI(taxInput, statusInput, contributionInput, dependentInput);
+
+        console.log(AdjustedIncome);
+        let sum = CalculateFederalTax(AdjustedIncome, statusInput);
         console.log(sum);
         console.log(statusInput);
-        document.getElementById("tax-result").value = sum;
+        document.getElementById("fed-tax-result").value = sum;
        
 
     });
@@ -135,15 +164,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("reset-button").addEventListener("click", function () {
-        // Clear all form fields
+        
         document.getElementById("salary-input").value = "";
         document.getElementById("state-input").value = "";
         document.getElementById("status-input").selectedIndex = 0; // Reset the dropdown to its initial state
         document.getElementById("bonus-input").value = "";
         document.getElementById("contribution-input").value = "";
         document.getElementById("dependent-input").value = "";
-
-        // Clear any previous error message
+       
         document.getElementById("error-message").textContent = "";
     });
 });

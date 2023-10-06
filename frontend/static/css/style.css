@@ -59,9 +59,30 @@ body {
   margin: 0 5px;
 }
 
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
 .blue-button {
   
   margin-top: 10px;
+  display: flex;
+  background-color: #007bff; /* Blue background color */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;
+  cursor: pointer;
+  outline: none; /* Remove the default focus outline */
+}
+.reset-button {
+  
+  margin-top: 10px;
+  margin-left: 10px;
   display: flex;
   background-color: #007bff; /* Blue background color */
   color: white; /* White text color */

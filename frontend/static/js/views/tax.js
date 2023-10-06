@@ -95,7 +95,11 @@ export default class extends AbstractView{
                     <input type="number" id="contribution-input" class="input-box" placeholder="Contributions (401K*, HSA**, 457b***)">
                     <label for="dependent-input" class="input-label"></label>
                     <input type = "number" id="dependent-input" class="input-box" placeholder="# of Dependents" step = "any">
-                    <button id = "submit-button" class="blue-button">Submit</button>
+                    <div class="button-container">
+                     <button id="submit-button" class="blue-button">Submit</button>
+                     <button id="reset-button" class="reset-button">Reset</button>
+                    </div>
+                    <div id="error-message" style="color: red;"></div>
                 </div>
            </div>
 

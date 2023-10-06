@@ -69,24 +69,35 @@ function AGI(taxInput, statusInput, contributionInput, dependentInput){
 
     const contribution = isNaN(contributionInput) ? 0 : parseFloat(contributionInput);
     const dependent = isNaN(dependentInput) ? 0 : parseFloat(dependentInput) * dependentCredit;
-    
+
     if (statusInput === "Single" || statusInput === "MarriedSep"){
-            return taxInput - singleStandardDeduction - contribution - dependent;
+            if (taxInput <= (singleStandardDeduction + contribution + dependent)){
+                return 0;
+            }else{
+                return taxInput - singleStandardDeduction - contribution - dependent;
+            }
         } else if (statusInput === "Married"){
-            return taxInput - marriedStandardDeduction - contribution - dependent;
+            if (taxInput <= (singleStandardDeduction + contribution + dependent)){
+                return 0;
+            }else{
+                return taxInput - marriedStandardDeduction - contribution - dependent;
+            }
         } else if (statusInput === "Head of Household"){
-            return taxInput - headStandardDeduction - contribution - dependent;
+            if (taxInput <= (singleStandardDeduction + contribution + dependent)){
+                return 0;
+            }else{
+                return taxInput - headStandardDeduction - contribution - dependent;
+            }
         }else{
             console.log("Invalid filing status");
         }
-
   }
 
 function CalculateFederalTax(){
     return
 }
 
-function CalculateStateTax(){
+function CalculateStateTax(sum, stateInput){
     return
 }
 
@@ -105,8 +116,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const contributionInput = parseFloat(document.getElementById("contribution-input").value);
         const dependentInput = parseFloat(document.getElementById("dependent-input").value);
 
+        if (statusInput === "" || stateInput === "") {
+            document.getElementById("error-message").textContent = "Please fill out first 3 fields.";
+            return; 
+        }
+
+        // Clear any previous error message
+        document.getElementById("error-message").textContent = "";
     
-        let sum = AGI(taxInput, statusInput, contributionInput,dependentInput);
+        let sum = AGI(taxInput, statusInput, contributionInput, dependentInput);
         console.log(sum);
         console.log(statusInput);
         document.getElementById("tax-result").value = sum;
@@ -115,5 +133,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("reset-button").addEventListener("click", function () {
+        // Clear all form fields
+        document.getElementById("salary-input").value = "";
+        document.getElementById("state-input").value = "";
+        document.getElementById("status-input").selectedIndex = 0; // Reset the dropdown to its initial state
+        document.getElementById("bonus-input").value = "";
+        document.getElementById("contribution-input").value = "";
+        document.getElementById("dependent-input").value = "";
 
+        // Clear any previous error message
+        document.getElementById("error-message").textContent = "";
+    });
+});
   

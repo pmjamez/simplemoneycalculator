@@ -100,6 +100,8 @@ export default class extends AbstractView{
                      <button id="reset-button" class="reset-button">Reset</button>
                     </div>
                     <div id="error-message" style="color: red;"></div>
+
+                    
                 </div>
            </div>
 

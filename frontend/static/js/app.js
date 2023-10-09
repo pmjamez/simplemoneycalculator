@@ -132,7 +132,9 @@ function CalculateFederalTax(AdjustedIncome, statusInput){
     return taxOwed;
 }
 
-function CalculateStateTax(AdjustedIncome, stateInput){
+function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput, dependentInput){
+
+   
 
     const stateTaxRates = [
         {
@@ -440,24 +442,24 @@ function CalculateStateTax(AdjustedIncome, stateInput){
         },
         {
             name: "UT",
-            brackets: [0.0495],
+            brackets: [0.0485],
             amounts: null,
-            deduction: [0],
-            dependent: [0]
+            deduction: [831,1662],
+            dependent: [1802]
         },
         {
             name: "VT",
-            brackets: [0.0335, 0.066, 0.076, 0.0875, 0.0895],
-            amounts: [39150, 195750, 260250],
-            deduction: [0],
-            dependent: [0]
+            brackets: [0.0335, 0.066, 0.076, 0.0875],
+            amounts: [0, 42150,102200,213150],
+            deduction: [6500,13050],
+            dependent: [4500]
         },
         {
             name: "VA",
-            brackets: [0.02, 0.03, 0.0575],
-            amounts: [3000, 5000, 17000],
-            deduction: [0],
-            dependent: [0]
+            brackets: [0.02, 0.03, 0.05, 0.0575],
+            amounts: [0, 3000, 5000, 17000],
+            deduction: [8000,16000],
+            dependent: [930]
         },
         {
             name: "WA",
@@ -468,17 +470,17 @@ function CalculateStateTax(AdjustedIncome, stateInput){
         },
         {
             name: "WV",
-            brackets: [0.03, 0.04, 0.045, 0.06],
-            amounts: [10000, 25000, 40000],
+            brackets: [0.03, 0.04, 0.045, 0.06, 0.065],
+            amounts: [0, 10000, 25000, 40000, 60000],
             deduction: [0],
             dependent: [0]
         },
         {
             name: "WI",
-            brackets: [0.0354, 0.0465, 0.062],
-            amounts: null,
-            deduction: [0],
-            dependent: [0]
+            brackets: [0.0354, 0.0465, 0.053,0.0765],
+            amounts: [0,13810,27630,304170],
+            deduction: [12760,23620],
+            dependent: [700]
         },
         {
             name: "WY",
@@ -490,31 +492,44 @@ function CalculateStateTax(AdjustedIncome, stateInput){
         },
         {
             name: "DC",
-            brackets: [0.0],
-            amounts: null,
-            deduction: [0],
+            brackets: [0.04,0.06,0.065,0.085,0.0925,0.0975,0.1075],
+            amounts: [0,10000,40000,60000,250000,500000,1000000],
+            deduction: [13850,27700],
             dependent: [0],
 
-        },
+        }
+
        
     ]
-    console.log(stateInput);
+
+    const contribution = isNaN(contributionInput) ? 0 : parseFloat(contributionInput);
+    const dependent = isNaN(dependentInput) ? 0 : parseFloat(dependentInput);
 
     const stateInfo = stateTaxRates.find(state => state.name === stateInput);
 
     if (!stateInfo) {
         return "Invalid state input";
     }
-
     const brackets = stateInfo.brackets;
     const amounts = stateInfo.amounts;
+    const deduction = stateInfo.deduction;
+    const dependentamount = stateInfo.dependent;
 
-    // Check if the state has no tax (e.g., Alaska, Florida, etc.)
+    let AdjustedIncome = 0;
+
+    if (statusInput === "Single" || statusInput === "MarriedSep" || statusInput === "Head of Household"){
+        AdjustedIncome = taxInput - deduction[0] - (dependentamount[0] * dependent) - contribution;
+    } else if (statusInput === "Married"){
+        AdjustedIncome = taxInput - deduction[1] - (dependentamount[0] * dependent) - contribution;
+    }else{
+        console.log("Invalid filing status");
+    }
+
     if (!brackets || brackets.length === 0) {
         return 0;
     }
 
-    // Calculate the state tax owed based on the income and tax brackets
+
     let stateTax = 0;
     let taxableIncome = AdjustedIncome;
 
@@ -568,7 +583,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(statusInput);
         document.getElementById("fed-tax-result").value = sum;
 
-        let stateTax11 = CalculateStateTax(AdjustedIncome, stateInput);
+        let stateTax11 = CalculateStateTax(taxInput, statusInput, stateInput,contributionInput, dependentInput);
         console.log(stateTax11);
         document.getElementById("state-tax-result").value = stateTax11;
        

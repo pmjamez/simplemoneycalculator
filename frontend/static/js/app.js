@@ -83,7 +83,7 @@ function AGI(taxInput, statusInput, contributionInput, dependentInput){
             }else{
                 return taxInput - marriedStandardDeduction - contribution - dependent;
             }
-        } else if (statusInput === "Head of Household"){
+        } else if (statusInput === "HeadOfHousehold"){
             if (taxInput <= (singleStandardDeduction + contribution + dependent)){
                 return 0;
             }else{
@@ -100,8 +100,10 @@ function CalculateFederalTax(AdjustedIncome, statusInput){
         Single: [0, 11000, 42745, 95375, 182100, 231250, 578125],
         Married: [0, 22000, 85490, 190750, 364200, 462500, 1156250],
         MarriedSep: [0, 11000, 42745, 95375, 182100, 231250, 578125],
-        HeadOfHousehold: [0, 15700, 59850, 95350, 182100, 2312250, 578100] // you might want to double-check these values
+        HeadOfHousehold: [0, 15700, 59850, 95350, 182100, 2312250, 578100] 
     };
+
+    
 
     const incomeAmounts = baseAmounts[statusInput];
 
@@ -123,45 +125,14 @@ function CalculateFederalTax(AdjustedIncome, statusInput){
         }
     }
 
-    // In case AdjustedIncome is more than the highest bracket
+    
     taxOwed += (AdjustedIncome - incomeAmounts[incomeAmounts.length - 1]) * taxRates[taxRates.length - 1];
 
-    return taxOwed.toFixed(2);
+    return taxOwed;
 
 
-    // let incomeAmounts = [];
-
-    // let taxbracket1 = 0;
-    // let taxbracket2 = 11000;
-    // let taxbracket3 = 42745;
-    // let taxbracket4 = 95375;
-    // let taxbracket5 = 182100;
-    // let taxbracket6 = 231250;
-    // let taxbracket7 = 578125;
-
-    // if (statusInput === 'Single' || statusInput === 'MarriedSep') {
-    //     incomeAmounts = [taxbracket1,taxbracket2,taxbracket3,taxbracket4,taxbracket5,taxbracket6,taxbracket7];
-    // } else if (statusInput === 'Married') {
-    //     incomeAmounts = [taxbracket1,taxbracket2*2,taxbracket3*2,taxbracket4*2,taxbracket5*2,taxbracket6*2,taxbracket7*2];
-    // } else if (statusInput === "Head of Household") {
-    //     incomeAmounts = [0, 15700, 59850, 95350, 182100, 2312250, 578100];
-    // } else {
-    //     console.log ("error");
-    // }
-    // let taxOwed = 0;
     
-    // for (let i = 1; i < incomeAmounts.length; i++) {
-    //     const prevIncome = incomeAmounts[i - 1];
-    //     const currentIncome = incomeAmounts[i];
-
-    //     if (AdjustedIncome <= currentIncome) {
-    //         taxOwed += (AdjustedIncome - prevIncome) * taxRates[i - 1];
-    //         break; 
-    //     } else {
-    //         taxOwed += (currentIncome - prevIncome) * taxRates[i - 1];
-    //     }
-    // }
-    // return taxOwed.toFixed(2);
+  
 }
 
 function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput, dependentInput){
@@ -549,10 +520,18 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
 
     let AdjustedIncome = 0;
 
-    if (statusInput === "Single" || statusInput === "MarriedSep" || statusInput === "Head of Household"){
-        AdjustedIncome = taxInput - deduction[0] - (dependentamount[0] * dependent) - contribution;
+    if (statusInput === "Single" || statusInput === "MarriedSep" || statusInput === "HeadOfHousehold"){
+        if (taxInput < (deduction[0] + (dependentamount[0] * dependent) + contribution)){
+            AdjustedIncome = 0;
+        }else{
+            AdjustedIncome = taxInput - deduction[0] - (dependentamount[0] * dependent) - contribution;
+        }
     } else if (statusInput === "Married"){
-        AdjustedIncome = taxInput - deduction[1] - (dependentamount[0] * dependent) - contribution;
+        if (taxInput < (deduction[1] + (dependentamount[0] * dependent) + contribution)){
+            AdjustedIncome = 0;
+        }else{
+            AdjustedIncome = taxInput - deduction[1] - (dependentamount[0] * dependent) - contribution;
+        }
     }else{
         console.log("Invalid filing status");
     }
@@ -578,7 +557,7 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
         }
     }
 
-    return stateTax.toFixed(2);
+    return stateTax;
 }
 
 function CalculateSocialSecurityTax(taxInput, statusInput){
@@ -603,7 +582,7 @@ function CalculateSocialSecurityTax(taxInput, statusInput){
         console.log("error");
     }
 
-    return SStax.toFixed(2);
+    return SStax;
 }
 
 function CalculateMedicareTax(taxInput, statusInput){
@@ -622,29 +601,35 @@ function CalculateMedicareTax(taxInput, statusInput){
     }else{
         Medtax = taxInput*MedcarTax;
     }
-    return Medtax.toFixed(2);
+    return Medtax;
 }
 
 function CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySocialSecTaxResult,displayStateTaxResult){
 
     let total = (parseFloat(displayFedTaxResult) + parseFloat(displayMedTaxResult) + parseFloat(displaySocialSecTaxResult) + parseFloat(displayStateTaxResult));
 
-    return total.toFixed(2);
+    return total;
 
 }
 
 function CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount){
 
     let takehome = (parseFloat(taxInput) - parseFloat(displayTotalTaxAmount));
-    return takehome.toFixed(2);
+    return takehome;
 
 }
 
 function CalculateMonthlyTotalTakeHomePay(displayTakeHomePay){
 
     let takehome = (parseFloat(displayTakeHomePay)/12);
-    return takehome.toFixed(2);
+    return takehome;
     
+}
+
+function CalculatePercentage(taxInput, displayTotalTaxAmount ){
+    let percentage = (displayTotalTaxAmount/taxInput) * 100;
+
+    return percentage;
 }
 
 function formatCurrency(amount) {
@@ -695,6 +680,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let monthdisplayTakeHomePay = CalculateMonthlyTotalTakeHomePay(displayTakeHomePay);
         document.getElementById("monthtakehome-pay").value =formatCurrency(monthdisplayTakeHomePay);
 
+        let displayPercentage = CalculatePercentage(taxInput, displayTotalTaxAmount);
+        document.getElementById("percentage").value =  displayPercentage.toFixed(2) + "%";
+
     
 
     });
@@ -716,6 +704,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("medi-tax-result").value ="";
         document.getElementById("takehome-pay").value ="";
         document.getElementById("monthtakehome-pay").value ="";
+        document.getElementById("percentage").value ="";
     });
 });
   

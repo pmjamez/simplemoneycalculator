@@ -88,7 +88,7 @@ export default class extends AbstractView{
                             <option value="Single">Single</option>
                             <option value="Married">Married, Filed Jointly</option>
                             <option value="MarriedSep">Married, Filed Separately</option>
-                            <option value="Head of Household"> Head of Household</option>
+                            <option value="HeadOfHousehold"> Head of Household</option>
                      </select>
 
             
@@ -127,7 +127,8 @@ export default class extends AbstractView{
                     <input type="text" id="takehome-pay" class="input-box" placeholder=""disabled>
                     <label for="monthtakehome-pay" class="input-label">Monthly Take-Home Pay:</label>
                     <input type="text" id="monthtakehome-pay" class="input-box" placeholder=""disabled>
-               
+                    <label for="percentage" class="input-label">% Of Income to Taxes</label>
+                    <input type="text" id="percentage" class="input-box" placeholder=""disabled>
                 </div>
 
             </div>

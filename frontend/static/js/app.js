@@ -618,9 +618,6 @@ function CalculateMonthlyTotalTakeHomePay(displayTakeHomePay){
 }
 
 
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("submit-button").addEventListener("click", function () {
         const taxInput = parseFloat(document.getElementById("salary-input").value);
@@ -665,9 +662,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let monthdisplayTakeHomePay = CalculateMonthlyTotalTakeHomePay(displayTakeHomePay);
         document.getElementById("monthtakehome-pay").value = monthdisplayTakeHomePay;
 
-        
-
-
+    
 
     });
   });

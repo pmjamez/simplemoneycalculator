@@ -40,8 +40,8 @@ export default class extends AbstractView{
                     <input type = "number" id="weeksyear" class="input-box" placeholder="" step = "any">
 
                     <div class="button-container">
-                    <button id="submit-button" class="blue-button">Submit</button>
-                    <button id="reset-button" class="reset-button">Reset</button>
+                    <button id="submit-button2" class="blue-button">Submit</button>
+                    <button id="reset-button2" class="reset-button">Reset</button>
                    </div>
                 </div>
            </div>

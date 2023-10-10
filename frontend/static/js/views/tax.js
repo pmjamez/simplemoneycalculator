@@ -90,8 +90,11 @@ export default class extends AbstractView{
                             <option value="MarriedSep">Married, Filed Separately</option>
                             <option value="Head of Household"> Head of Household</option>
                      </select>
-                    <label for="bonus-input" class="input-label">Additional (Optional):</label>
-                    <input type="number" id="bonus-input" class="input-box" placeholder="Enter Bonus">
+
+            
+
+                    <label for="contribution-input" class="input-label">Additional (Optional):</label>
+
                     <input type="number" id="contribution-input" class="input-box" placeholder="Contributions (401K*, HSA**, 457b***)">
                     <label for="dependent-input" class="input-label"></label>
                     <input type = "number" id="dependent-input" class="input-box" placeholder="# of Dependents" step = "any">

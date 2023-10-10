@@ -129,7 +129,7 @@ function CalculateFederalTax(AdjustedIncome, statusInput){
             taxOwed += (currentIncome - prevIncome) * taxRates[i - 1];
         }
     }
-    return taxOwed;
+    return taxOwed.toFixed(2);
 }
 
 function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput, dependentInput){
@@ -546,25 +546,32 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
         }
     }
 
-    return stateTax;
+    return stateTax.toFixed(2);
 }
 
-function CalculateSocialSecurityTax(taxInput){
+function CalculateSocialSecurityTax(taxInput, statusInput){
 
     const SocsecTax = 0.062;
     const incomecap = 160200;
+    let factor = 0;
+
+    if (statusInput === "Married"){
+        factor = 2;
+    }else{
+        factor = 1;
+    }
 
     let SStax = 0;
 
     if (taxInput < incomecap){
-        SStax = taxInput * SocsecTax;
-    } else if (taxInput > incomecap){
-        SStax = incomecap * SocsecTax;
+        SStax = taxInput * SocsecTax * factor;
+    } else if (taxInput >= incomecap){
+        SStax = incomecap * SocsecTax * factor;
     } else{
         console.log("error");
     }
 
-    return SStax;
+    return SStax.toFixed(2);
 }
 
 function CalculateMedicareTax(taxInput, statusInput){
@@ -574,13 +581,43 @@ function CalculateMedicareTax(taxInput, statusInput){
 
     let Medtax = 0;
 
-    if (statusInput === "Married"){
-        Medtax = taxInput * (MedcarTax +addMedcarTax);
-    } else{
-        Medtax = taxInput * MedcarTax;
+    if (taxInput > 250000 && statusInput === "Married"){
+        Medtax = taxInput * (MedcarTax +addMedcarTax) * 2 ;
+    } else if (taxInput > 200000){
+        Medtax = taxInput * (MedcarTax + addMedcarTax);
+    } else if (statusInput === "Married"){
+        Medtax = taxInput*MedcarTax * 2;
+    }else{
+        Medtax = taxInput*MedcarTax;
     }
-    return Medtax;
+    return Medtax.toFixed(2);
 }
+
+function CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySocialSecTaxResult,displayStateTaxResult){
+
+    let total = (parseFloat(displayFedTaxResult) + parseFloat(displayMedTaxResult) + parseFloat(displaySocialSecTaxResult) + parseFloat(displayStateTaxResult));
+
+    return total.toFixed(2);
+
+}
+
+function CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount){
+
+    let takehome = (parseFloat(taxInput) - parseFloat(displayTotalTaxAmount));
+
+    return takehome.toFixed(2);
+
+}
+
+function CalculateMonthlyTotalTakeHomePay(displayTakeHomePay){
+
+    let takehome = (parseFloat(displayTakeHomePay)/12);
+
+    return takehome.toFixed(2);
+    
+}
+
+
 
 
 
@@ -593,7 +630,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const statusSelect = document.getElementById("status-input");
         const statusInput = statusSelect.options[statusSelect.selectedIndex].value;
-        const bonusInput = parseFloat(document.getElementById("bonus-input").value);
+
         const contributionInput = parseFloat(document.getElementById("contribution-input").value);
         const dependentInput = parseFloat(document.getElementById("dependent-input").value);
 
@@ -607,16 +644,30 @@ document.addEventListener("DOMContentLoaded", function () {
     
         let AdjustedIncome = AGI(taxInput, statusInput, contributionInput, dependentInput);
 
-        console.log(AdjustedIncome);
-        let sum = CalculateFederalTax(AdjustedIncome, statusInput);
-        console.log(sum);
-        console.log(statusInput);
-        document.getElementById("fed-tax-result").value = sum;
+        let displayFedTaxResult = CalculateFederalTax(AdjustedIncome, statusInput);
+        document.getElementById("fed-tax-result").value = displayFedTaxResult;
 
-        let stateTax11 = CalculateStateTax(taxInput, statusInput, stateInput,contributionInput, dependentInput);
-        console.log(stateTax11);
-        document.getElementById("state-tax-result").value = stateTax11;
-       
+        let displayStateTaxResult = CalculateStateTax(taxInput, statusInput, stateInput,contributionInput, dependentInput);
+        document.getElementById("state-tax-result").value = displayStateTaxResult;
+
+        let displaySocialSecTaxResult = CalculateSocialSecurityTax(taxInput, statusInput);
+        document.getElementById("social-tax-result").value = displaySocialSecTaxResult;
+
+        let displayMedTaxResult = CalculateMedicareTax(taxInput, statusInput);
+        document.getElementById("medi-tax-result").value = displayMedTaxResult;
+
+        let displayTotalTaxAmount = CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySocialSecTaxResult,displayStateTaxResult);
+        document.getElementById("tax-result").value = displayTotalTaxAmount;
+
+        let displayTakeHomePay = CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount);
+        document.getElementById("takehome-pay").value = displayTakeHomePay;
+
+        let monthdisplayTakeHomePay = CalculateMonthlyTotalTakeHomePay(displayTakeHomePay);
+        document.getElementById("monthtakehome-pay").value = monthdisplayTakeHomePay;
+
+        
+
+
 
     });
   });
@@ -627,11 +678,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("salary-input").value = "";
         document.getElementById("state-input").value = "";
         document.getElementById("status-input").selectedIndex = 0; // Reset the dropdown to its initial state
-        document.getElementById("bonus-input").value = "";
         document.getElementById("contribution-input").value = "";
         document.getElementById("dependent-input").value = "";
-       
         document.getElementById("error-message").textContent = "";
+        document.getElementById("tax-result").value ="";
+        document.getElementById("fed-tax-result").value ="";
+        document.getElementById("state-tax-result").value ="";
+        document.getElementById("social-tax-result").value ="";
+        document.getElementById("medi-tax-result").value ="";
+        document.getElementById("takehome-pay").value ="";
+        document.getElementById("monthtakehome-pay").value ="";
     });
 });
   

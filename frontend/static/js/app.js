@@ -96,40 +96,72 @@ function AGI(taxInput, statusInput, contributionInput, dependentInput){
 
 function CalculateFederalTax(AdjustedIncome, statusInput){
     const taxRates = [0.1, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37];
+    const baseAmounts = {
+        Single: [0, 11000, 42745, 95375, 182100, 231250, 578125],
+        Married: [0, 22000, 85490, 190750, 364200, 462500, 1156250],
+        MarriedSep: [0, 11000, 42745, 95375, 182100, 231250, 578125],
+        HeadOfHousehold: [0, 15700, 59850, 95350, 182100, 2312250, 578100] // you might want to double-check these values
+    };
 
-    let incomeAmounts = [];
+    const incomeAmounts = baseAmounts[statusInput];
 
-    let taxbracket1 = 0;
-    let taxbracket2 = 11000;
-    let taxbracket3 = 42745;
-    let taxbracket4 = 95375;
-    let taxbracket5 = 182100;
-    let taxbracket6 = 231250;
-    let taxbracket7 = 578125;
-
-    if (statusInput === 'Single' || statusInput === 'MarriedSep') {
-        incomeAmounts = [taxbracket1,taxbracket2,taxbracket3,taxbracket4,taxbracket5,taxbracket6,taxbracket7];
-    } else if (statusInput === 'Married') {
-        incomeAmounts = [taxbracket1,taxbracket2*2,taxbracket3*2,taxbracket4*2,taxbracket5*2,taxbracket6*2,taxbracket7*2];
-    } else if (statusInput === "Head of Household") {
-        incomeAmounts = [0, 15700, 59850, 95350, 182100, 2312250, 578100];
-    } else {
-        console.log ("error");
+    if (!incomeAmounts) {
+        console.log("Error: Invalid status input");
+        return;
     }
+
     let taxOwed = 0;
-    
     for (let i = 1; i < incomeAmounts.length; i++) {
         const prevIncome = incomeAmounts[i - 1];
         const currentIncome = incomeAmounts[i];
 
         if (AdjustedIncome <= currentIncome) {
             taxOwed += (AdjustedIncome - prevIncome) * taxRates[i - 1];
-            break; 
+            return taxOwed.toFixed(2); 
         } else {
             taxOwed += (currentIncome - prevIncome) * taxRates[i - 1];
         }
     }
+
+    // In case AdjustedIncome is more than the highest bracket
+    taxOwed += (AdjustedIncome - incomeAmounts[incomeAmounts.length - 1]) * taxRates[taxRates.length - 1];
+
     return taxOwed.toFixed(2);
+
+
+    // let incomeAmounts = [];
+
+    // let taxbracket1 = 0;
+    // let taxbracket2 = 11000;
+    // let taxbracket3 = 42745;
+    // let taxbracket4 = 95375;
+    // let taxbracket5 = 182100;
+    // let taxbracket6 = 231250;
+    // let taxbracket7 = 578125;
+
+    // if (statusInput === 'Single' || statusInput === 'MarriedSep') {
+    //     incomeAmounts = [taxbracket1,taxbracket2,taxbracket3,taxbracket4,taxbracket5,taxbracket6,taxbracket7];
+    // } else if (statusInput === 'Married') {
+    //     incomeAmounts = [taxbracket1,taxbracket2*2,taxbracket3*2,taxbracket4*2,taxbracket5*2,taxbracket6*2,taxbracket7*2];
+    // } else if (statusInput === "Head of Household") {
+    //     incomeAmounts = [0, 15700, 59850, 95350, 182100, 2312250, 578100];
+    // } else {
+    //     console.log ("error");
+    // }
+    // let taxOwed = 0;
+    
+    // for (let i = 1; i < incomeAmounts.length; i++) {
+    //     const prevIncome = incomeAmounts[i - 1];
+    //     const currentIncome = incomeAmounts[i];
+
+    //     if (AdjustedIncome <= currentIncome) {
+    //         taxOwed += (AdjustedIncome - prevIncome) * taxRates[i - 1];
+    //         break; 
+    //     } else {
+    //         taxOwed += (currentIncome - prevIncome) * taxRates[i - 1];
+    //     }
+    // }
+    // return taxOwed.toFixed(2);
 }
 
 function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput, dependentInput){
@@ -604,7 +636,6 @@ function CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySoc
 function CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount){
 
     let takehome = (parseFloat(taxInput) - parseFloat(displayTotalTaxAmount));
-
     return takehome.toFixed(2);
 
 }
@@ -612,9 +643,12 @@ function CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount){
 function CalculateMonthlyTotalTakeHomePay(displayTakeHomePay){
 
     let takehome = (parseFloat(displayTakeHomePay)/12);
-
     return takehome.toFixed(2);
     
+}
+
+function formatCurrency(amount) {
+    return "$" + parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 
@@ -636,31 +670,30 @@ document.addEventListener("DOMContentLoaded", function () {
             return; 
         }
 
-        // Clear any previous error message
         document.getElementById("error-message").textContent = "";
     
         let AdjustedIncome = AGI(taxInput, statusInput, contributionInput, dependentInput);
 
         let displayFedTaxResult = CalculateFederalTax(AdjustedIncome, statusInput);
-        document.getElementById("fed-tax-result").value = displayFedTaxResult;
+        document.getElementById("fed-tax-result").value = formatCurrency(displayFedTaxResult);
 
         let displayStateTaxResult = CalculateStateTax(taxInput, statusInput, stateInput,contributionInput, dependentInput);
-        document.getElementById("state-tax-result").value = displayStateTaxResult;
+        document.getElementById("state-tax-result").value = formatCurrency(displayStateTaxResult);
 
         let displaySocialSecTaxResult = CalculateSocialSecurityTax(taxInput, statusInput);
-        document.getElementById("social-tax-result").value = displaySocialSecTaxResult;
+        document.getElementById("social-tax-result").value = formatCurrency(displaySocialSecTaxResult);
 
         let displayMedTaxResult = CalculateMedicareTax(taxInput, statusInput);
-        document.getElementById("medi-tax-result").value = displayMedTaxResult;
+        document.getElementById("medi-tax-result").value = formatCurrency(displayMedTaxResult);
 
         let displayTotalTaxAmount = CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySocialSecTaxResult,displayStateTaxResult);
-        document.getElementById("tax-result").value = displayTotalTaxAmount;
+        document.getElementById("tax-result").value = formatCurrency(displayTotalTaxAmount);
 
         let displayTakeHomePay = CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount);
-        document.getElementById("takehome-pay").value = displayTakeHomePay;
+        document.getElementById("takehome-pay").value = formatCurrency(displayTakeHomePay);
 
         let monthdisplayTakeHomePay = CalculateMonthlyTotalTakeHomePay(displayTakeHomePay);
-        document.getElementById("monthtakehome-pay").value = monthdisplayTakeHomePay;
+        document.getElementById("monthtakehome-pay").value =formatCurrency(monthdisplayTakeHomePay);
 
     
 

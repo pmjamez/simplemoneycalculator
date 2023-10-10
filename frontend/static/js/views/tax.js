@@ -95,7 +95,7 @@ export default class extends AbstractView{
 
                     <label for="contribution-input" class="input-label">Additional (Optional):</label>
 
-                    <input type="number" id="contribution-input" class="input-box" placeholder="Contributions (401K*, HSA**, 457b***)">
+                    <input type="number" id="contribution-input" class="input-box" placeholder="Contributions (401K, HSA, 457b, etc)">
                     <label for="dependent-input" class="input-label"></label>
                     <input type = "number" id="dependent-input" class="input-box" placeholder="# of Dependents" step = "any">
                     <div class="button-container">
@@ -110,7 +110,7 @@ export default class extends AbstractView{
 
             <div class = "rounded-rectangle2">
              <h2 class = "title">Tax Estimation</h2>
-             <p class="description">**Note this is only based on the standard deduction and no other contributions**</p>
+             <p class="description">Note this is just an estimation of Federal, State, and FICA taxes </p>
 
                 <div class="input-container">
                     <label for="tax-result" class="input-label">Total Yearly Tax Amount:</label>

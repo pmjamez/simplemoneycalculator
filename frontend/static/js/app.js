@@ -549,9 +549,39 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
     return stateTax;
 }
 
-function CalculateSocialSecurityTax(){
-    return
+function CalculateSocialSecurityTax(taxInput){
+
+    const SocsecTax = 0.062;
+    const incomecap = 160200;
+
+    let SStax = 0;
+
+    if (taxInput < incomecap){
+        SStax = taxInput * SocsecTax;
+    } else if (taxInput > incomecap){
+        SStax = incomecap * SocsecTax;
+    } else{
+        console.log("error");
+    }
+
+    return SStax;
 }
+
+function CalculateMedicareTax(taxInput, statusInput){
+
+    const MedcarTax = 0.0145;
+    const addMedcarTax = 0.02345;
+
+    let Medtax = 0;
+
+    if (statusInput === "Married"){
+        Medtax = taxInput * (MedcarTax +addMedcarTax);
+    } else{
+        Medtax = taxInput * MedcarTax;
+    }
+    return Medtax;
+}
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

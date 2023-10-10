@@ -332,14 +332,14 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
         {
             name: "NV",
             brackets: [0.0],
-            amounts: null,
+            amounts: [0],
             deduction: [0],
             dependent: [0]
         },
         {
             name: "NH",
             brackets: [0.0],
-            amounts: null,
+            amounts: [0],
             deduction: [0],
             dependent: [0]
         },
@@ -527,35 +527,44 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
             AdjustedIncome = taxInput - deduction[0] - (dependentamount[0] * dependent) - contribution;
         }
     } else if (statusInput === "Married"){
-        if (taxInput < (deduction[1] + (dependentamount[0] * dependent) + contribution)){
+        if(deduction[0] === 0){
             AdjustedIncome = 0;
         }else{
-            AdjustedIncome = taxInput - deduction[1] - (dependentamount[0] * dependent) - contribution;
+            if (taxInput < (deduction[1] + (dependentamount[0] * dependent) + contribution)){
+                AdjustedIncome = 0;
+            }else{
+                AdjustedIncome = taxInput - deduction[1] - (dependentamount[0] * dependent) - contribution;
+            }
         }
+       
     }else{
         console.log("Invalid filing status");
     }
 
-    if (!brackets || brackets.length === 0) {
-        return 0;
-    }
-
+ 
 
     let stateTax = 0;
     let taxableIncome = AdjustedIncome;
 
-    for (let i = 0; i < brackets.length; i++) {
-        if (i === brackets.length - 1) {
-            // Apply the highest bracket rate to the remaining income
-            stateTax += taxableIncome * brackets[i];
-        } else {
-            // Calculate tax within the current bracket
-            const bracketAmount = amounts ? amounts[i] : 0;
-            const taxableAmount = Math.min(taxableIncome, bracketAmount);
-            stateTax += taxableAmount * brackets[i];
-            taxableIncome -= taxableAmount;
+    if (brackets === 0) {
+        stateTax = 0;
+    }else{
+        for (let i = 0; i < brackets.length; i++) {
+            if (i === brackets.length - 1) {
+                // Apply the highest bracket rate to the remaining income
+                stateTax += taxableIncome * brackets[i];
+            } else {
+                // Calculate tax within the current bracket
+                const bracketAmount = amounts ? amounts[i] : 0;
+                const taxableAmount = Math.min(taxableIncome, bracketAmount);
+                stateTax += taxableAmount * brackets[i];
+                taxableIncome -= taxableAmount;
+            }
         }
     }
+
+
+    
 
     return stateTax;
 }

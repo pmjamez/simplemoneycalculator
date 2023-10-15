@@ -21,7 +21,7 @@ export default class extends AbstractView{
          <div class = "pagebox">
              <div class="rounded-rectangle">
              <h2 class = "title">Convert Wage</h2>
-             <p class="description">Calculate your estimated tax payments based on your yearly salary</p>
+             <p class="description">Convert your wage or salary</p>
 
                 <div class="input-container">
 
@@ -47,12 +47,12 @@ export default class extends AbstractView{
            </div>
 
             <div class = "rounded-rectangle2">
-             <h2 class = "title">Tax Estimation</h2>
-             <p class="description">**Note this is only based on the standard deduction and no other contributions**</p>
+             <h2 class = "title">Converted Salary or Wage</h2>
+             <p class="description">Salary or Wage</p>
 
                 <div class="input-container">
-                    <label for="tax-result" class="input-label">Total Yearly Tax Amount:</label>
-                    <input type="text" id="tax-result" class="input-box" placeholder=""disabled>
+                    <label for="final-result" class="input-label">Total Yearly Tax Amount:</label>
+                    <input type="text" id="final-result" class="input-box" placeholder=""disabled>
                     
                
                 </div>

@@ -542,7 +542,6 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
     }
 
  
-
     let stateTax = 0;
     let taxableIncome = AdjustedIncome;
 
@@ -562,10 +561,6 @@ function CalculateStateTax(taxInput, statusInput, stateInput, contributionInput,
             }
         }
     }
-
-
-    
-
     return stateTax;
 }
 
@@ -699,7 +694,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("reset-button").addEventListener("click", function () {
-        
         document.getElementById("salary-input").value = "";
         document.getElementById("state-input").value = "";
         document.getElementById("status-input").selectedIndex = 0; // Reset the dropdown to its initial state

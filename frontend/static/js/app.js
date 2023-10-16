@@ -640,74 +640,109 @@ function formatCurrency(amount) {
     return "$" + parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function handleSubmitButtonClick() {
+    const taxInput = parseFloat(document.getElementById("salary-input").value);
+
+    const stateSelect = document.getElementById("state-input");
+    const stateInput = stateSelect.options[stateSelect.selectedIndex].value;
+
+    const statusSelect = document.getElementById("status-input");
+    const statusInput = statusSelect.options[statusSelect.selectedIndex].value;
+
+    const contributionInput = parseFloat(document.getElementById("contribution-input").value);
+    const dependentInput = parseFloat(document.getElementById("dependent-input").value);
+
+    if (statusInput === "" || stateInput === "") {
+        document.getElementById("error-message").textContent = "Please fill out first 3 fields.";
+        return; 
+    }
+
+    document.getElementById("error-message").textContent = "";
+
+    let AdjustedIncome = AGI(taxInput, statusInput, contributionInput, dependentInput);
+
+    let displayFedTaxResult = CalculateFederalTax(AdjustedIncome, statusInput);
+    document.getElementById("fed-tax-result").value = formatCurrency(displayFedTaxResult);
+
+    let displayStateTaxResult = CalculateStateTax(taxInput, statusInput, stateInput,contributionInput, dependentInput);
+    document.getElementById("state-tax-result").value = formatCurrency(displayStateTaxResult);
+
+    let displaySocialSecTaxResult = CalculateSocialSecurityTax(taxInput, statusInput);
+    document.getElementById("social-tax-result").value = formatCurrency(displaySocialSecTaxResult);
+
+    let displayMedTaxResult = CalculateMedicareTax(taxInput, statusInput);
+    document.getElementById("medi-tax-result").value = formatCurrency(displayMedTaxResult);
+
+    let displayTotalTaxAmount = CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySocialSecTaxResult,displayStateTaxResult);
+    document.getElementById("tax-result").value = formatCurrency(displayTotalTaxAmount);
+
+    let displayTakeHomePay = CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount);
+    document.getElementById("takehome-pay").value = formatCurrency(displayTakeHomePay);
+
+    let monthdisplayTakeHomePay = CalculateMonthlyTotalTakeHomePay(displayTakeHomePay);
+    document.getElementById("monthtakehome-pay").value =formatCurrency(monthdisplayTakeHomePay);
+
+    let displayPercentage = CalculatePercentage(taxInput, displayTotalTaxAmount);
+    document.getElementById("percentage").value =  displayPercentage.toFixed(2) + "%";
+}
+
+function resetForm() {
+    document.getElementById("salary-input").value = "";
+    document.getElementById("state-input").value = "";
+    document.getElementById("status-input").selectedIndex = 0; // Reset the dropdown to its initial state
+    document.getElementById("contribution-input").value = "";
+    document.getElementById("dependent-input").value = "";
+    document.getElementById("error-message").textContent = "";
+    document.getElementById("tax-result").value ="";
+    document.getElementById("fed-tax-result").value ="";
+    document.getElementById("state-tax-result").value ="";
+    document.getElementById("social-tax-result").value ="";
+    document.getElementById("medi-tax-result").value ="";
+    document.getElementById("takehome-pay").value ="";
+    document.getElementById("monthtakehome-pay").value ="";
+    document.getElementById("percentage").value ="";
+}
+
+
+function handleMoneyChoiceChange() {
+        console.log("working");
+        var inputSection = document.getElementById("input-section");
+        var selectedValue = this.value;
+        
+        if (selectedValue === "Wage") {
+            inputSection.innerHTML = `
+                <label for="Salaryorwage" class="input-label">Input Hourly Wage</label>
+                <input type="number" id="Salaryorwage" class="input-box" placeholder="" step="any">
+                <label for="hours" class="input-label">Hours worked per week?</label>
+                <input type="number" id="hours" class="input-box" placeholder="" step="any">
+            `;
+        } else if (selectedValue === "Salary") {
+            inputSection.innerHTML = `
+                <label for="Salaryorwage" class="input-label">Input Salary</label>
+                <input type="number" id="Salaryorwage" class="input-box" placeholder="" step="any">
+                <label for="hours" class="input-label">Hours worked per week?</label>
+                <input type="number" id="hours" class="input-box" placeholder="" step="any">
+            `;
+        } else {
+            inputSection.innerHTML = ''; // Clear the input section if "Select Type" is chosen
+        }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("submit-button").addEventListener("click", function () {
-        const taxInput = parseFloat(document.getElementById("salary-input").value);
-
-        const stateSelect = document.getElementById("state-input");
-        const stateInput = stateSelect.options[stateSelect.selectedIndex].value;
-
-        const statusSelect = document.getElementById("status-input");
-        const statusInput = statusSelect.options[statusSelect.selectedIndex].value;
-
-        const contributionInput = parseFloat(document.getElementById("contribution-input").value);
-        const dependentInput = parseFloat(document.getElementById("dependent-input").value);
-
-        if (statusInput === "" || stateInput === "") {
-            document.getElementById("error-message").textContent = "Please fill out first 3 fields.";
-            return; 
-        }
-
-        document.getElementById("error-message").textContent = "";
+    var resetButton = document.getElementById("reset-button");
     
-        let AdjustedIncome = AGI(taxInput, statusInput, contributionInput, dependentInput);
+    if (resetButton) { // Check if the reset button element exists on the current page
+        resetButton.addEventListener("click", resetForm);
+    }
 
-        let displayFedTaxResult = CalculateFederalTax(AdjustedIncome, statusInput);
-        document.getElementById("fed-tax-result").value = formatCurrency(displayFedTaxResult);
-
-        let displayStateTaxResult = CalculateStateTax(taxInput, statusInput, stateInput,contributionInput, dependentInput);
-        document.getElementById("state-tax-result").value = formatCurrency(displayStateTaxResult);
-
-        let displaySocialSecTaxResult = CalculateSocialSecurityTax(taxInput, statusInput);
-        document.getElementById("social-tax-result").value = formatCurrency(displaySocialSecTaxResult);
-
-        let displayMedTaxResult = CalculateMedicareTax(taxInput, statusInput);
-        document.getElementById("medi-tax-result").value = formatCurrency(displayMedTaxResult);
-
-        let displayTotalTaxAmount = CalculateTotalAmount(displayFedTaxResult,displayMedTaxResult,displaySocialSecTaxResult,displayStateTaxResult);
-        document.getElementById("tax-result").value = formatCurrency(displayTotalTaxAmount);
-
-        let displayTakeHomePay = CalculateTotalTakeHomePay(taxInput, displayTotalTaxAmount);
-        document.getElementById("takehome-pay").value = formatCurrency(displayTakeHomePay);
-
-        let monthdisplayTakeHomePay = CalculateMonthlyTotalTakeHomePay(displayTakeHomePay);
-        document.getElementById("monthtakehome-pay").value =formatCurrency(monthdisplayTakeHomePay);
-
-        let displayPercentage = CalculatePercentage(taxInput, displayTotalTaxAmount);
-        document.getElementById("percentage").value =  displayPercentage.toFixed(2) + "%";
-
+    const submitButton = document.getElementById("submit-button");
     
-
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("reset-button").addEventListener("click", function () {
-        document.getElementById("salary-input").value = "";
-        document.getElementById("state-input").value = "";
-        document.getElementById("status-input").selectedIndex = 0; // Reset the dropdown to its initial state
-        document.getElementById("contribution-input").value = "";
-        document.getElementById("dependent-input").value = "";
-        document.getElementById("error-message").textContent = "";
-        document.getElementById("tax-result").value ="";
-        document.getElementById("fed-tax-result").value ="";
-        document.getElementById("state-tax-result").value ="";
-        document.getElementById("social-tax-result").value ="";
-        document.getElementById("medi-tax-result").value ="";
-        document.getElementById("takehome-pay").value ="";
-        document.getElementById("monthtakehome-pay").value ="";
-        document.getElementById("percentage").value ="";
-    });
+    if (submitButton) { // Check if the submit button element exists on the current page
+        submitButton.addEventListener("click", handleSubmitButtonClick);
+    }
+    const moneyChoiceDropdown = document.getElementById("money-choice");
+    
+    if (moneyChoiceDropdown) { // Check if the dropdown element exists on the current page
+        moneyChoiceDropdown.addEventListener("change", handleMoneyChoiceChange);
+    }
 });
-  

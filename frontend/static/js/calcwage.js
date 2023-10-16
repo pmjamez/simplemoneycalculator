@@ -1,12 +1,18 @@
+
+const typeSelect = document.getElementById("money-choice");
+const hoursworked = document.getElementById("hours");
+const weeksworked = document.getElementById("weeksyear");
+
+
+
 function handleMoneyChoiceChange() {
  
-
-    const typeSelect = document.getElementById("money-choice");
-
-    const hourlyWageLabel = document.getElementById("Salaryorwage");
+    
+    const hourlyWageLabel = document.querySelector('label[for="Salaryorwage"]');
     const titleLabel = document.getElementById("page-title");
     const resultLabeltitle = document.getElementById("result-title");
     const firstDescription = document.getElementById("firstDescription");
+  
 
  
 
@@ -40,14 +46,14 @@ function resetForm(){
 
 }
 
-function CalculateSomething(typeSelect, hourlyWageLabel){
+function CalculateSomething(typeSelect, ){
 
     if (typeSelect === "Wage"){
 
     }else if(typeSelect === "Salary"){
 
     }else{
-        
+
     }
 
     
@@ -56,10 +62,8 @@ function CalculateSomething(typeSelect, hourlyWageLabel){
 
 function SubmitButton(){
 
+    let displayResult = CalculateSomething(typeSelect, hourly)
 }
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", function () {

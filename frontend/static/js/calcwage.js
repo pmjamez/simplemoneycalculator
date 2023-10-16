@@ -40,7 +40,17 @@ function resetForm(){
 
 }
 
-function CalculateSomething(){
+function CalculateSomething(typeSelect, hourlyWageLabel){
+
+    if (typeSelect === "Wage"){
+
+    }else if(typeSelect === "Salary"){
+
+    }else{
+        
+    }
+
+    
 
 }
 

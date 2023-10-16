@@ -20,16 +20,16 @@ export default class extends AbstractView{
 
          <div class = "pagebox">
              <div class="rounded-rectangle">
-             <h2 class = "title">Convert Wage</h2>
-             <p class="description">Convert your wage or salary</p>
+             <h2 id="page-title" class="title">Convert Wage</h2>
+             <p class="description" id = "firstDescription">Convert your Wage to Salary</p>
 
                 <div class="input-container">
 
-                    <label for "money-choice" class = "input-label">Salary Or Wage</label/>
+                    <label for "money-choice" class = "input-label">Salary Or Wage</label>
                     <select id = "money-choice" class ="input-box" placeholder = "Select Type">
                         <option value = "">Select Type</option>
-                        <option value = "Wage">Wage</option>
-                        <option value = "Salary">Salary</option>
+                        <option value = "Wage">Wage To Salary</option>
+                        <option value = "Salary">Salary To Wage</option>
                         </select>
                     <label for="Salaryorwage" class="input-label">Input Hourly Wage</label>
                     <input type="number" id="Salaryorwage" class="input-box" placeholder="" step="any">
@@ -48,11 +48,11 @@ export default class extends AbstractView{
            </div>
 
             <div class = "rounded-rectangle2">
-             <h2 class = "title">Converted Salary or Wage</h2>
-             <p class="description">Salary or Wage</p>
+             <h2 id="result-title" class="title">Converted Salary</h2>
+             <p class="description">Includes Overtime Pay</p>
 
                 <div class="input-container">
-                    <label for="final-result" class="input-label">Total Yearly Tax Amount:</label>
+                    <label for="final-result" class="input-label">You make:</label>
                     <input type="text" id="final-result" class="input-box" placeholder=""disabled>
                     
                

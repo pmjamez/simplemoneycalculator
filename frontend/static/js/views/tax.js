@@ -138,7 +138,7 @@ export default class extends AbstractView{
 
          </div>
 
-         <script src="app.js"></script>
+         <script src="calctax.js"></script>
         
         
 

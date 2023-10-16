@@ -31,6 +31,10 @@ export default class extends AbstractView{
                         <option value = "Wage">Wage</option>
                         <option value = "Salary">Salary</option>
                         </select>
+                    <label for="Salaryorwage" class="input-label">Input Hourly Wage</label>
+                    <input type="number" id="Salaryorwage" class="input-box" placeholder="" step="any">
+                    <label for="hours" class="input-label">Hours worked per week?</label>
+                    <input type="number" id="hours" class="input-box" placeholder="" step="any">
                     
                    
                     <label for "weeksyear" class = "input-label">How many weeks worked per year?</label/>
@@ -61,7 +65,7 @@ export default class extends AbstractView{
 
          </div>
 
-         <script src="app.js"></script>
+         <script src="calcwage.js"></script>
         
 
         

@@ -71,7 +71,7 @@ function CalculateSomething(typeSelectValue, wage, hoursworked, weeksworked){
     }else if (typeSelectValue === "Wage" && hoursworked > normalworkinghours){
         finalTotal = (wage * normalworkinghours * weeksworked) + (wage * 1.5 * (hoursworked - normalworkinghours) * weeksworked);
     }else{
-        console.error("Error in CalculateSomething: Invalid input parameters.");
+        console.log("error");
     }
 
     return finalTotal;
@@ -86,6 +86,7 @@ function SubmitButton(){
     const wage = parseFloat(document.getElementById("Salaryorwage").value);
     const hoursworked = parseFloat(document.getElementById("hours").value);
     const weeksworked = parseFloat(document.getElementById("weeksyear").value);
+    
     let displayResult = CalculateSomething(typeSelectValue, wage, hoursworked, weeksworked);
 
     if (typeSelectValue === "Wage"){

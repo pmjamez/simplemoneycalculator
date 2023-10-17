@@ -100,6 +100,7 @@ function SubmitButton(){
 
 document.addEventListener("DOMContentLoaded", function() {
     bindEventListenersForPage2();
+    bindEventListeners();
 });
 
 function bindEventListenersForPage2() {

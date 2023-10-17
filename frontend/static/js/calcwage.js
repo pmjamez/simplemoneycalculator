@@ -71,7 +71,7 @@ function CalculateSomething(typeSelectValue, wage, hoursworked, weeksworked){
     }else if (typeSelectValue === "Wage" && hoursworked > normalworkinghours){
         finalTotal = (wage * normalworkinghours * weeksworked) + (wage * 1.5 * (hoursworked - normalworkinghours) * weeksworked);
     }else{
-        console.log("error");
+        console.error("Error in CalculateSomething: Invalid input parameters.");
     }
 
     return finalTotal;
@@ -93,6 +93,8 @@ function SubmitButton(){
     }else{
         document.getElementById("final-result").value = formatResult(displayResult) + " Per Hour";
     }
+
+    console.log("working");
    
 }
 

@@ -31,12 +31,13 @@ export default class extends AbstractView{
                         <option value = "Wage">Wage To Salary</option>
                         <option value = "Salary">Salary To Wage</option>
                         </select>
+
                     <label for="Salaryorwage" class="input-label">Input Hourly Wage</label>
                     <input type="number" id="Salaryorwage" class="input-box" placeholder="" step="any">
+
                     <label for="hours" class="input-label">Hours worked per week?</label>
                     <input type="number" id="hours" class="input-box" placeholder="" step="any">
                     
-                   
                     <label for "weeksyear" class = "input-label">How many weeks worked per year?</label/>
                     <input type = "number" id="weeksyear" class="input-box" placeholder="" step = "any">
 

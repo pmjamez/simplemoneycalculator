@@ -640,7 +640,6 @@ function resetForm() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    bindEventListenersForPage2();
     bindEventListeners();
 });
 

@@ -62,7 +62,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    bindEventListenersForPage2();
-    bindEventListeners();
-});

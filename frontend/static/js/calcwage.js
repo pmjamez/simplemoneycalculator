@@ -107,18 +107,22 @@ function bindEventListenersForPage2() {
     var submitButton1 = document.getElementById("submit-button2");
 
     if (submitButton1) {
+        
+        submitButton1.removeEventListener("click", SubmitButton);
         submitButton1.addEventListener("click", SubmitButton);
     }
 
     var resetButton = document.getElementById("reset-button2");
     
     if (resetButton) {
+        resetButton.removeEventListener("click", resetForm);
         resetButton.addEventListener("click", resetForm);
     }
 
     const moneyChoiceDropdown = document.getElementById("money-choice");
 
     if (moneyChoiceDropdown) {
+        moneyChoiceDropdown.removeEventListener("change", handleMoneyChoiceChange);
         moneyChoiceDropdown.addEventListener("change", handleMoneyChoiceChange);
     }
 }

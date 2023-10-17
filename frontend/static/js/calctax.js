@@ -647,12 +647,16 @@ function bindEventListeners() {
     var resetButton = document.getElementById("reset-button");
     
     if (resetButton) {
+        // Remove any previously bound event listener
+        resetButton.removeEventListener("click", resetForm);
         resetButton.addEventListener("click", resetForm);
     }
 
     const submitButton = document.getElementById("submit-button");
     
     if (submitButton) {
+        // Remove any previously bound event listener
+        submitButton.removeEventListener("click", handleSubmitButtonClick);
         submitButton.addEventListener("click", handleSubmitButtonClick);
     }
 }

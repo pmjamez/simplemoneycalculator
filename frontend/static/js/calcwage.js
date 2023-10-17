@@ -98,6 +98,10 @@ function SubmitButton(){
    
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    bindEventListenersForPage2();
+});
+
 function bindEventListenersForPage2() {
     var submitButton1 = document.getElementById("submit-button2");
 
@@ -117,3 +121,18 @@ function bindEventListenersForPage2() {
         moneyChoiceDropdown.addEventListener("change", handleMoneyChoiceChange);
     }
 }
+function renderCalculator() {
+    const appDiv = document.getElementById("app");
+
+    // Replace ... (your calculator's HTML) ... with the actual HTML template you shared
+    let calculatorHTML = `
+        ... (your calculator's HTML) ...
+    `;
+
+    appDiv.innerHTML = calculatorHTML;
+
+    // Call the binding function here after the HTML is rendered
+    bindEventListenersForPage2();
+}
+
+renderCalculator();

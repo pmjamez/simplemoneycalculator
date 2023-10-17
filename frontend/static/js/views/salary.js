@@ -66,7 +66,7 @@ export default class extends AbstractView{
 
          </div>
 
-         <script src="calcwage.js"></script>
+        
         
 
         

@@ -46,11 +46,12 @@ const router = async() => {
 
     document.querySelector("#app").innerHTML = await view.getHtml();
 
+    if (view.init) {
+        await view.init();
+    }
     
 
-    // Re-bind event listeners after rendering the new view
-    bindEventListeners(); // Assuming bindEventListeners() is the function to bind events for tax
-    bindEventListenersForPage2(); // Assuming this is the function to bind events for salary
+    
 };
 
 window.addEventListener("popstate", router);

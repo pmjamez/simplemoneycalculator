@@ -1,5 +1,6 @@
 import AbstractView from "./AbstractView.js";
 
+
 export default class extends AbstractView{
     constructor(params){
         super(params);
@@ -138,7 +139,7 @@ export default class extends AbstractView{
 
          </div>
 
-         <script src="calctax.js"></script>
+         
         
         
 
@@ -149,6 +150,8 @@ export default class extends AbstractView{
 
 
     }
+
+   
 
 };
  

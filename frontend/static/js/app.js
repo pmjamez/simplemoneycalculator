@@ -45,6 +45,12 @@ const router = async() => {
     const view = new match.route.view(getParams(match));
 
     document.querySelector("#app").innerHTML = await view.getHtml();
+
+    document.querySelector("#app").innerHTML = await view.getHtml();
+
+    // Re-bind event listeners after rendering the new view
+    bindEventListeners(); // Assuming bindEventListeners() is the function to bind events for tax
+    bindEventListenersForPage2(); // Assuming this is the function to bind events for salary
 };
 
 window.addEventListener("popstate", router);

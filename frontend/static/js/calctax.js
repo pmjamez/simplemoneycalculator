@@ -641,6 +641,7 @@ function resetForm() {
 
 document.addEventListener("DOMContentLoaded", function() {
     bindEventListeners();
+    bindEventListenersForPage2();
 });
 
 function bindEventListeners() {

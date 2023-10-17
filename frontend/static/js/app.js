@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             navigateTo(e.target.href);
         }
+        location.reload();
     });
     router();
 });

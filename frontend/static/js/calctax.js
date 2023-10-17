@@ -639,10 +639,7 @@ function resetForm() {
     document.getElementById("percentage").value ="";
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    bindEventListeners();
-    bindEventListenersForPage2();
-});
+ß
 
 function bindEventListeners() {
     var resetButton = document.getElementById("reset-button");

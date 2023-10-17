@@ -62,8 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.matches("[data-link")){
             e.preventDefault();
             navigateTo(e.target.href);
+            location.reload();
         }
-        location.reload();
+        
     });
     router();
 });

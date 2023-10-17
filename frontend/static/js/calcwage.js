@@ -98,10 +98,7 @@ function SubmitButton(){
    
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    bindEventListenersForPage2();
-    bindEventListeners();
-});
+
 
 function bindEventListenersForPage2() {
     var submitButton1 = document.getElementById("submit-button2");

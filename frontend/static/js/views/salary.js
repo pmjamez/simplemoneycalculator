@@ -25,7 +25,7 @@ export default class extends AbstractView{
 
                 <div class="input-container">
 
-                    <label for "money-choice" class = "input-label">Salary Or Wage</label>
+                    <label for="money-choice" class="input-label">Salary Or Wage</label>
                     <select id = "money-choice" class ="input-box" placeholder = "Select Type">
                         <option value = "">Select Type</option>
                         <option value = "Wage">Wage To Salary</option>
@@ -38,7 +38,7 @@ export default class extends AbstractView{
                     <label for="hours" class="input-label">Hours worked per week?</label>
                     <input type="number" id="hours" class="input-box" placeholder="" step="any">
                     
-                    <label for "weeksyear" class = "input-label">How many weeks worked per year?</label/>
+                    <label for="weeksyear" class="input-label">How many weeks worked per year?</label>
                     <input type = "number" id="weeksyear" class="input-box" placeholder="" step = "any">
 
                     <div class="button-container">

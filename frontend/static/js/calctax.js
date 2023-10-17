@@ -639,18 +639,16 @@ function resetForm() {
     document.getElementById("percentage").value ="";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function bindEventListeners() {
     var resetButton = document.getElementById("reset-button");
     
-    if (resetButton) { // Check if the reset button element exists on the current page
+    if (resetButton) {
         resetButton.addEventListener("click", resetForm);
     }
 
     const submitButton = document.getElementById("submit-button");
     
-    if (submitButton) { // Check if the submit button element exists on the current page
+    if (submitButton) {
         submitButton.addEventListener("click", handleSubmitButtonClick);
     }
- 
-    
-});
+}

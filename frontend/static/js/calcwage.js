@@ -96,22 +96,22 @@ function SubmitButton(){
    
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function bindEventListenersForPage2() {
     var submitButton1 = document.getElementById("submit-button2");
 
-    if (submitButton1) { 
+    if (submitButton1) {
         submitButton1.addEventListener("click", SubmitButton);
     }
 
     var resetButton = document.getElementById("reset-button2");
     
-    if (resetButton) { // Check if the reset button element exists on the current page
+    if (resetButton) {
         resetButton.addEventListener("click", resetForm);
     }
 
     const moneyChoiceDropdown = document.getElementById("money-choice");
 
-    if (moneyChoiceDropdown) { // Check if the dropdown element exists on the current page
+    if (moneyChoiceDropdown) {
         moneyChoiceDropdown.addEventListener("change", handleMoneyChoiceChange);
     }
-});
+}
